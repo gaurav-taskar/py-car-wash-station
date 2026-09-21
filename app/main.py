@@ -5,17 +5,27 @@ class Car:
     absolutely clean  10
     brand - car brand name
     """
-    def __init__(self, comfort_class: int, clean_mark: int, brand: str) -> None :
+    def __init__(
+        self,
+        comfort_class: int,
+        clean_mark: int,
+        brand: str,
+    ) -> None:
         self.comfort_class = comfort_class
         self.clean_mark = clean_mark
         self.brand = brand
 
 
 class CarWashStation:
-    """distance_from_city_center - how far station from the city center, from 1.0 to 10.0
-clean_power - clean_mark to which this car wash station washes (yes, not all stations can clean your car completely)
-average_rating - average rating of the station, from 1.0 to 5.0, rounded to 1 decimal
-count_of_ratings - number of ratings the station has received  """
+    """Car wash station attributes.
+
+    distance_from_city_center - distance from the city center, from 1.0 to
+    10.0
+    clean_power - clean_mark to which this station washes cars
+    average_rating - average rating of the station, from 1.0 to 5.0, rounded
+    to 1 decimal
+    count_of_ratings - number of ratings the station has received
+    """
     def __init__(
         self,
         distance_from_city_center: float,
@@ -74,39 +84,3 @@ count_of_ratings - number of ratings the station has received  """
             self.count_of_ratings += 1
             self.average_rating = round(total_rating
                                         / self.count_of_ratings, 1)
-
-# bmw = Car(comfort_class=3, clean_mark=3, brand='BMW')
-# audi = Car(comfort_class=4, clean_mark=2, brand='Audi')
-
-
-# print(bmw.clean_mark)  # 3
-# print(audi.clean_mark) # 2
-
-# wash_station = CarWashStation(
-#     distance_from_city_center=5,
-#     clean_power=6,
-#     average_rating=3.5,
-#     count_of_ratings=6
-# )
-
-# income = wash_station.serve_cars([bmw, audi])
-
-# print(income)  # 17.5
-
-# print(bmw.clean_mark)  # 6
-# print(audi.clean_mark) # 6
-
-# wash_station = CarWashStation(
-#     distance_from_city_center=6,
-#     clean_power=8,
-#     average_rating=3.9,
-#     count_of_ratings=11
-# )
-
-# print(wash_station.average_rating)    # 3.9
-# print(wash_station.count_of_ratings)  # 11
-
-# wash_station.rate_service(5)
-
-# print(wash_station.average_rating)    # 4.0
-# print(wash_station.count_of_ratings)  # 12
