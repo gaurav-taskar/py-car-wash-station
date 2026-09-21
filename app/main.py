@@ -16,21 +16,35 @@ class CarWashStation:
 clean_power - clean_mark to which this car wash station washes (yes, not all stations can clean your car completely)
 average_rating - average rating of the station, from 1.0 to 5.0, rounded to 1 decimal
 count_of_ratings - number of ratings the station has received  """
-    def __init__(self, distance_from_city_center: float, clean_power: int, average_rating: float, count_of_ratings: int):
+    def __init__(
+        self,
+        distance_from_city_center: float,
+        clean_power: int,
+        average_rating: float,
+        count_of_ratings: int,
+    ) -> None:
         self.distance_from_city_center = distance_from_city_center
         self.clean_power = clean_power
         self.average_rating = average_rating
         self.count_of_ratings = count_of_ratings
 
     def calculate_washing_price(self, car: Car) -> float:
-        """calculates cost for a single car wash, cost is calculated as: 
-        car's comfort class * difference between wash station's clean power and car's clean mark * car wash station rating / 
-        car wash station distance to the center of the city, returns number rounded to 1 decimal"""
-        cost = (car.comfort_class * (self.clean_power - car.clean_mark) * self.average_rating) / self.distance_from_city_center
+        """calculates cost for a single car wash, cost is calculated as:
+        car's comfort class * difference between wash station's clean power
+        and car's clean mark * car wash station rating /
+        car wash station distance to the center of the city,
+        returns number rounded to 1 decimal"""
+        cost = (
+            car.comfort_class
+            * (self.clean_power - car.clean_mark)
+            * self.average_rating
+            / self.distance_from_city_center
+        )
         return round(cost, 1)
 
     def wash_single_car(self, car: Car) -> float:
-        """washes a single car, so it should have clean_mark equals wash station's clean_power, 
+        """washes a single car, so it should have
+        clean_mark equals wash station's clean_power,
         if wash_station.clean_power is greater than car.clean_mark"""
         if self.clean_power > car.clean_mark:
             price = self.calculate_washing_price(car)
@@ -39,8 +53,10 @@ count_of_ratings - number of ratings the station has received  """
         return 0.0
 
     def serve_cars(self, cars: list[Car]) -> float:
-        """method, that takes a list of Car's, washes only cars with clean_mark < clean_power of wash station and 
-        returns income of CarWashStation for serving this list of Car's, rounded to 1 decimal
+        """method, that takes a list of Car's,
+        washes only cars with clean_mark < clean_power of wash station
+        and returns income of CarWashStation for serving
+        this list of Car's, rounded to 1 decimal
         """
         total_income = 0.0
         for car in cars:
@@ -49,12 +65,15 @@ count_of_ratings - number of ratings the station has received  """
         return round(total_income, 1)
 
     def rate_service(self, rating: float) -> None:
-        """method that adds a single rate to the wash station, and based on this single rate average_rating and count_of_ratings should be changed"""
+        """method that adds a single rate to the wash station,
+        and based on this single rate average_rating
+        and count_of_ratings should be changed"""
         if 1.0 <= rating <= 5.0:
             total_rating = self.average_rating * self.count_of_ratings
             total_rating += rating
             self.count_of_ratings += 1
-            self.average_rating = round(total_rating / self.count_of_ratings, 1)
+            self.average_rating = round(total_rating
+                                        / self.count_of_ratings, 1)
 
 # bmw = Car(comfort_class=3, clean_mark=3, brand='BMW')
 # audi = Car(comfort_class=4, clean_mark=2, brand='Audi')
